@@ -1,10 +1,10 @@
-let city = $("#searchTerm").val();
+let city = $("#searchBox").val();
 
 const apiId = "&appid=3fc536d25b83466115e518bfbf157b33";
 
 let date = new Date();
 
-$("#searchTerm").keypress(function(event) { 
+$("#searchBox").keypress(function(event) { 
 	
 	if (event.keyCode === 13) { 
 		event.preventDefault();
@@ -17,14 +17,15 @@ $("#searchBtn").on("click", function() {
   $('#forecastH5').addClass('show');
 
   
-  city = $("#searchTerm").val();
+  city = $("#searchBox").val();
   
   
-  $("#searchTerm").val("");  
+  $("#searchBox").val("");  
 
   
   const queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + apiId;
 
+  // found this instead of fetch https://api.jquery.com/jquery.post/
   $.ajax({
     url: queryUrl,
     method: "GET"
@@ -82,7 +83,7 @@ $("#searchBtn").on("click", function() {
   }
 
 function getCurrentForecast () {
-  
+  // Also found axios. Ended up changing it to ajax but still learning what the difference is when it comes to calling APIs
   $.ajax({
     url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + apiId,
     method: "GET"
